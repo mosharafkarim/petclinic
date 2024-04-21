@@ -23,6 +23,17 @@ spec:
       - name: petclinic-container
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
+        env:
+        - name: MY_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username
+        - name: MY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: password
         resources:
           limits:
             cpu: '1'
